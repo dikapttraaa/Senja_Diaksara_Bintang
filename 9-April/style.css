@@ -1,0 +1,404 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* Background Gradient Elegant: Navy ke Deep Purple */
+    background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    
+    font-family: 'Playfair Display', serif; /* Font klasik jika tersedia, atau serif */
+    overflow: hidden;
+    text-align: center;
+    position: relative;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+   background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    padding: 60px 40px;
+    border-radius: 30px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    z-index: 10;
+    
+    /* UBAH BAGIAN INI */
+    width: max-content; /* Lebar kotak akan mengikuti panjang teks otomatis */
+    max-width: 90vw;    /* Tapi tetap tidak akan melebihi 90% lebar layar HP */
+    
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    color: #f8f9fa;
+    background: rgba(255, 255, 255, 0.05); /* Transparan tipis */
+    backdrop-filter: blur(10px); /* Efek kaca buram */
+    border: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    color: #d4af37;
+    font-size: clamp(20px, 5vw, 32px); /* Font akan mengecil otomatis di layar HP agar tidak tumpuk */
+    
+    /* TAMBAHKAN INI */
+    white-space: nowrap; /* Memaksa teks tetap dalam satu baris */
+    margin-bottom: 30px;
+}
+
+p {
+    color: #e0e0e0;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Jarak antar tombol agar tidak dempet */
+    margin-top: 30px;
+    position: relative;
+    width: 100%;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 50px;
+    border: 2px solid #d4af37;
+    background: transparent;
+    color: #d4af37;
+    transition: background 0.3s, transform 0.2s;
+    /* Jangan kasih position di sini! */
+}
+
+.btn-opsi {
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 50px;
+    border: 2px solid #d4af37;
+    background: transparent;
+    color: #d4af37;
+    transition: background 0.3s, transform 0.2s;
+    /* Jangan kasih position di sini! */
+}
+
+#btn-buka {
+    background: linear-gradient(45deg, #d4af37, #f9e29c);
+    color: #1a1a1a;
+    border: none;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+}
+
+#btn-mau-banget, #btn-mau {
+    background: transparent;
+    color: #d4af37;
+    border: 2px solid #d4af37;
+}
+
+#btn-mau-banget:hover, #btn-mau:hover {
+    background: #d4af37;
+    color: #1a1a1a;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+}
+
+#btn-ngga {
+    box-sizing: border-box;
+    display: inline-block;
+    white-space: nowrap;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    /* Biarkan mengikuti alur flexbox dulu */
+}
+
+/* Bunga diganti dengan partikel emas jatuh */
+.flower {
+    position: absolute;
+    color: #d4af37;
+    font-size: 20px;
+    pointer-events: none;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+#mute-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid #d4af37;
+    color: #d4af37;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10000;
+}
+
+/* Kotak pembungkus utama */
+#audio-controls {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    display: flex !important; /* Memaksa berjejer */
+    flex-direction: row !important; 
+    gap: 15px !important; /* Memberi jarak antar tombol */
+    z-index: 999999 !important;
+    width: auto !important; /* Biar lebarnya mengikuti jumlah tombol */
+    height: auto !important;
+}
+
+/* Pengaturan khusus untuk tombol di dalam audio-controls */
+#audio-controls button {
+    /* Reset posisi agar TIDAK menumpuk */
+    position: relative !important; 
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    
+    /* Ukuran tombol */
+    width: 50px !important;
+    height: 50px !important;
+    
+    /* Tampilan */
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    border-radius: 50% !important;
+    background: rgba(20, 20, 20, 0.8) !important;
+    border: 2px solid #d4af37 !important;
+    color: #d4af37 !important;
+    cursor: pointer !important;
+    font-size: 18px !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5) !important;
+}
+
+#audio-controls button:hover {
+    background: #d4af37 !important;
+    color: #111 !important;
+}
+
+#audio-controls button:active {
+    transform: scale(0.9); /* Efek tombol tertekan */
+    background: rgba(212, 175, 55, 0.4);
+}
+
+.bg-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%);
+    z-index: -1; /* Di belakang semua elemen */
+    overflow: hidden;
+}
+
+/* Partikel Cahaya/Bintang */
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.3);
+    opacity: 0;
+    animation: moveStar 10s linear infinite;
+}
+
+/* Posisi acak untuk beberapa bintang */
+.star:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
+.star:nth-child(2) { top: 30%; left: 80%; animation-delay: 2s; }
+.star:nth-child(3) { top: 70%; left: 40%; animation-delay: 4s; }
+.star:nth-child(4) { top: 50%; left: 10%; animation-delay: 6s; }
+.star:nth-child(5) { top: 90%; left: 70%; animation-delay: 8s; }
+
+/* Gerakan Animasi */
+@keyframes moveStar {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-100vh) scale(0.5);
+        opacity: 0;
+    }
+}
+
+/* --- Animasi Ikon Surat --- */
+.envelope-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.envelope-icon {
+    font-size: 70px;
+    animation: floating 3s ease-in-out infinite;
+}
+
+.heart-pulse {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 25px;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes floating {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.3); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Animasi ini dipicu lewat JavaScript saat surat dibuka */
+.start-typing {
+    animation: typing 3s steps(30, end) forwards, blink 0.8s infinite;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
+/* --- Dekorasi Tambahan --- */
+.container {
+    border-radius: 25px !important;
+    padding: 40px !important;
+    background: rgba(15, 15, 15, 0.4) !important; /* Lebih gelap dikit biar teks emas nyala */
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.2) !important;
+}
+
+/* --- Elemen Bunga Pojok (Angin Sepoi) --- */
+.corner-flower {
+    position: fixed;
+    bottom: -20px; /* Sedikit tenggelam agar batangnya tidak kelihatan terpotong */
+    width: 250px; /* Sesuaikan ukuran bunga kamu */
+    height: 250px;
+    background-image: url('image/tul.png'); /* Ganti dengan nama file kamu */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    z-index: 10; /* Di depan background extras, tapi di belakang kontainer jika bertumpuk */
+    pointer-events: none; /* Agar tidak menghalangi klik */
+    opacity: 0.8; /* Sedikit transparan agar menyatu */
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3)); /* Efek cahaya emas samar */
+    opacity: 0.5;
+    
+    /* Inti Animasi: Goyangan Angin */
+    transform-origin: bottom center; /* Goyang dari bawah (seperti tertanam) */
+    animation: windSway 6s ease-in-out infinite alternate;
+}
+
+/* Posisi Kiri */
+.flower-left {
+    left: -30px; /* Sedikit keluar layar agar natural */
+    transform: rotate(5deg); /* Posisi awal sedikit miring */
+}
+
+/* Posisi Kanan */
+.flower-right {
+    right: -30px;
+    transform: rotate(-5deg) scaleX(-1); /* Miring berlawanan & Di-mirror */
+    animation-delay: 1s; /* Jeda animasi agar tidak goyang bebarengan */
+}
+
+/* Animasi Goyangan Angin Sepoi-Sepoi */
+@keyframes windSway {
+    0% {
+        transform: rotate(5deg) translateY(0);
+    }
+    50% {
+        transform: rotate(-3deg) translateY(-5px); /* Bergoyang ke kiri & sedikit naik */
+    }
+    100% {
+        transform: rotate(3deg) translateY(0); /* Bergoyang ke kanan */
+    }
+}
+
+/* Penyesuaian untuk Flower Right (karena sudah di-mirror) */
+.flower-right {
+    animation-name: windSwayRight;
+}
+
+@keyframes windSwayRight {
+    0% {
+        transform: rotate(-5deg) scaleX(-1) translateY(0);
+    }
+    50% {
+        transform: rotate(3deg) scaleX(-1) translateY(-5px);
+    }
+    100% {
+        transform: rotate(-3deg) scaleX(-1) translateY(0);
+    }
+}
+
+/* --- Animasi Muncul Bergantian --- */
+@keyframes munculBergantian {
+    0%, 10% {
+        opacity: 0;
+        transform: translateY(20px) rotate(5deg); /* Sedikit turun & miring */
+    }
+    40%, 60% {
+        opacity: 0.7; /* Muncul dengan transparansi cantik */
+        transform: translateY(0) rotate(0deg); /* Posisi sempurna */
+    }
+    90%, 100% {
+        opacity: 0;
+        transform: translateY(20px) rotate(-5deg); /* Menghilang lagi */
+    }
+}
+
+.corner-flower {
+    position: fixed;
+    bottom: -10px;
+    font-size: 80px; /* Jika pakai emoji */
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0; /* Awalnya tidak terlihat */
+    
+    /* Gunakan animasi muncul bergantian */
+    animation: munculBergantian 8s ease-in-out infinite;
+}
+
+/* Pengaturan Waktu (Delay) Agar Bergantian */
+
+.flower-left {
+    left: 20px;
+    animation-delay: 0s; /* Bunga kiri muncul duluan */
+}
+
+.flower-right {
+    right: 20px;
+    animation-delay: 4s; /* Bunga kanan muncul 4 detik kemudian (setengah durasi) */
+    transform: scaleX(-1); /* Di-mirror */
+}

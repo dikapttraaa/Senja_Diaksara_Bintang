@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senja Diaksara Bintang</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="corner-flower flower-left"></div>
+    <div class="corner-flower flower-right"></div>
+    
+    <div class="bg-animation">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+    </div>
+
+    <audio id="backsound" loop>
+        <source src="audio/Senja_Diaksara_Bintang.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="audio-controls">
+        <button onclick="ubahVolume(-0.1)">➖</button>
+        <button onclick="ubahVolume(0.1)">➕</button>
+        <button id="mute-btn" onclick="toggleMute()">🔇</button>
+    </div>
+
+    <div id="surat-container" class="container">
+    <div class="envelope-wrapper">
+        <div class="envelope-icon">📩</div>
+        <div class="heart-pulse"></div>
+    </div>
+    <h1>Ada surat buat Ribka...</h1>
+    <p>Silakan dibuka ya, ada sesuatu di dalam.</p>
+    <button id="btn-buka" onclick="bukaSurat()">Buka Surat</button>
+</div>
+
+<div id="main-container" class="container" style="display: none;">
+    <h1 id="question" class="typewriter">Ribka mau ngga jadi ceweku aja?</h1>
+    <div class="buttons">
+        <button id="btn-mau-banget" class="btn-opsi" onclick="tunjukkanCinta()">Mau Banget! 💖</button>
+        <button id="btn-mau" class="btn-opsi" onclick="tunjukkanCinta()">Mau ✨</button>
+        <button id="btn-ngga" class="btn-opsi" onclick="pindahTombol()">Ngga Mau 😜</button>
+    </div>
+</div>
+
+    <div id="flower-wrapper" style="display: none;">
+        </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
